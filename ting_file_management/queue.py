@@ -20,9 +20,16 @@ class Queue:
         except IndexError:
             raise IndexError
 
-# queue = Queue()
-# queue.enqueue(42)
-# queue.enqueue(43)
-# queue.enqueue(44)
+    def is_file_in_queue(self, file_name):
+        current_node = self._stack.head_node
+        position = 0
+        if len(self) <= 0:
+            return False
 
-# given = queue.dequeue()
+        while position <= len(self):
+            if current_node.value['nome_do_arquivo'] == file_name:
+                return True
+            else:
+                current_node = current_node.next
+                position += 1
+        return False
