@@ -1,4 +1,4 @@
-from Node import Node
+from ting_file_management.Node import Node
 
 
 class LinkedList:
@@ -30,21 +30,33 @@ class LinkedList:
         current_node.next = last_node
         self.__length += 1
 
+    def remove_first(self):
+        old_head = self.head_node
+        self.head_node = self.head_node.next
+        self.__length -= 1
+        return old_head
+
     def remove_last(self):
         before_last_node = self.head_node
 
         while before_last_node.next.next:
             before_last_node = before_last_node.next
+        removed_value = before_last_node.next
         before_last_node.next = None
         self.__length -= 1
+        return removed_value
 
     def peek_at(self, position):
-        node_to_return = None
         node_to_find = self.head_node
+
+        if 0 < position >= len(self) or position < 0:
+            raise IndexError()
+
         if node_to_find:
             while position > 0 and node_to_find.next:
                 node_to_find = node_to_find.next
                 position -= 1
             if node_to_find:
-                node_to_return = Node(node_to_find.value)
-        return node_to_return
+                return node_to_find
+        else:
+            raise IndexError()
