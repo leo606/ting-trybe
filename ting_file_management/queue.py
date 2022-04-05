@@ -8,6 +8,9 @@ class Queue:
     def __len__(self):
         return len(self._stack)
 
+    def __iter__(self):
+        return QueueIterator(self._stack)
+
     def enqueue(self, value):
         self._stack.insert_last(value)
 
@@ -33,3 +36,16 @@ class Queue:
                 current_node = current_node.next
                 position += 1
         return False
+
+
+class QueueIterator():
+    def __init__(self, stack):
+        self.current_file = stack.head_node
+
+    def __next__(self):
+        if not self.current_file:
+            raise StopIteration()
+
+        file = self.current_file.value
+        self.current_file = self.current_file.next
+        return file
