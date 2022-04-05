@@ -1,15 +1,28 @@
+from ting_file_management.LinkedList import LinkedList
+
+
 class Queue:
     def __init__(self):
-        """Inicialize sua estrutura aqui"""
+        self._stack = LinkedList()
 
     def __len__(self):
-        """Aqui irá sua implementação"""
+        return len(self._stack)
 
     def enqueue(self, value):
-        """Aqui irá sua implementação"""
+        self._stack.insert_last(value)
 
     def dequeue(self):
-        """Aqui irá sua implementação"""
+        return self._stack.remove_first().value
 
     def search(self, index):
-        """Aqui irá sua implementação"""
+        try:
+            return self._stack.peek_at(index).value
+        except IndexError:
+            raise IndexError
+
+# queue = Queue()
+# queue.enqueue(42)
+# queue.enqueue(43)
+# queue.enqueue(44)
+
+# given = queue.dequeue()
