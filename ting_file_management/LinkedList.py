@@ -29,3 +29,22 @@ class LinkedList:
             current_node = current_node.next
         current_node.next = last_node
         self.__length += 1
+
+    def remove_last(self):
+        before_last_node = self.head_node
+
+        while before_last_node.next.next:
+            before_last_node = before_last_node.next
+        before_last_node.next = None
+        self.__length -= 1
+
+    def peek_at(self, position):
+        node_to_return = None
+        node_to_find = self.head_node
+        if node_to_find:
+            while position > 0 and node_to_find.next:
+                node_to_find = node_to_find.next
+                position -= 1
+            if node_to_find:
+                node_to_return = Node(node_to_find.value)
+        return node_to_return
